@@ -38,7 +38,7 @@ function concatenateStrings(value1, value2) {
  *   ''      => 0
  */
 function getStringLength(value) {
-    throw new Error('Not implemented');
+    return value.length;
 }
 
 /**
@@ -55,7 +55,7 @@ function getStringLength(value) {
  *   'Chuck','Norris'  => 'Hello, Chuck Norris!'
  */
 function getStringFromTemplate(firstName, lastName) {
-    throw new Error('Not implemented');
+    return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -69,7 +69,11 @@ function getStringFromTemplate(firstName, lastName) {
  *   'Hello, Chuck Norris!' => 'Chuck Norris'
  */
 function extractNameFromTemplate(value) {
-    throw new Error('Not implemented');
+	let str="";
+	for(let i=7;i<value.length-1;i++){
+		str+=value[i];
+	}
+    return str;
 }
 
 
@@ -84,7 +88,7 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-    throw new Error('Not implemented');
+    return value[0];
 }
 
 /**
@@ -99,7 +103,7 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-    throw new Error('Not implemented');
+    return value.trim();
 }
 
 /**
@@ -114,7 +118,11 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-    throw new Error('Not implemented');
+	let str1="";
+	for(let i=1;i<=count;i++){
+		str1=str1+value;
+	}
+   return str1;
 }
 
 /**
@@ -130,7 +138,13 @@ function repeatString(value, count) {
  *   'ABABAB','BA' => 'ABAB'
  */
 function removeFirstOccurrences(str, value) {
-    throw new Error('Not implemented');
+    var strAnswer="";
+	for(var i=0;i<str.length;i++){
+		if (i<str.indexOf(value) || i>str.indexOf(value)+value.length-1){
+			strAnswer+=str[i];
+		}	
+	}
+	return strAnswer;
 }
 
 /**
@@ -145,7 +159,13 @@ function removeFirstOccurrences(str, value) {
  *   '<a>' => 'a'
  */
 function unbracketTag(str) {
-    throw new Error('Not implemented');
+   var strAnswer="";
+	for(var i=0;i<str.length;i++){
+		if (i!=str.indexOf('<') && i!=str.lastIndexOf('>')){
+			strAnswer+=str[i];
+		}	
+	}
+	return strAnswer;
 }
 
 
@@ -160,7 +180,8 @@ function unbracketTag(str) {
  *  'abcdefghijklmnopqrstuvwxyz' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  */
 function convertToUpperCase(str) {
-    throw new Error('Not implemented');
+	
+   return str.toUpperCase();
 }
 
 /**
@@ -174,7 +195,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-    throw new Error('Not implemented');
+   return str.split(';');
 }
 
 /**
@@ -201,7 +222,44 @@ function extractEmails(str) {
  *
  */
 function getRectangleString(width, height) {
-    throw new Error('Not implemented');
+	var str="";
+	var strBoolW=true;
+	var strBoolH=true;
+	for(var i=1;i<=height;i++)
+	{
+		
+		if(i==1){strBoolH=false;str+='┌';}
+		if(i==height){strBoolH=false;str+='└';}
+	
+	for(var j=1;j<width;j++)
+	{	
+    strBoolW=true;
+		if(i==1||i==height)
+		{
+		 if(j==(width-1) && i==1){str+='┐';strBoolW=false;} 
+		 if(j==(width-1)&&i==height){str+='┘';strBoolW=false;};
+		 if(strBoolW==true){str+='─';}
+		}
+		if(i>1&&i<height)
+		{
+			if(j==1){
+			str+='│';
+			}
+			if(j==height){
+				for(var bufi=1;bufi<width-1;bufi++)
+				str+=' ';
+				str+='│';
+			}
+			
+		}
+		
+	}	
+	str+='\n';
+	
+		
+	}
+	
+    return str;
 }
 
 
@@ -221,7 +279,35 @@ function getRectangleString(width, height) {
  *
  */
 function encodeToRot13(str) {
-    throw new Error('Not implemented');
+	var ALPHA='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var alpha='abcdefghijklmnopqrstuvwxyz';
+	var answer="";
+	var number;
+	var boolflag=true;
+	for(var i=0;i<str.length;i++)
+	{	
+		boolflag=true
+		if(ALPHA.indexOf(str[i])!=-1)
+		{
+			
+			number=(ALPHA.indexOf(str[i])+13)%26;
+			answer+=ALPHA.charAt(number);
+			boolflag=false;
+		}
+		
+		if(alpha.indexOf(str[i])!=-1)
+		{
+			
+			number=(alpha.indexOf(str[i])+13)%26;
+			answer+=alpha.charAt(number);
+			boolflag=false;
+		}	
+		
+		if(boolflag)answer+=str[i];
+		
+			
+	}
+    return answer;
 }
 
 /**
