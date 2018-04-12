@@ -369,7 +369,14 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-   throw new Error('Not implemented');
+	var array=['one','two','three','four','five','six','seven','eight','nine'];
+	function compare(a,b)
+	{
+	return(array.indexOf(a)-array.indexOf(b));		
+	}
+	arr.sort(compare);
+	return arr;
+   
 }
 
 /**
@@ -385,7 +392,10 @@ function sortDigitNamesByNumericOrder(arr) {
  *   [ 1, 10, 100, 1000 ]  => 1111
  */
 function getItemsSum(arr) {
-   throw new Error('Not implemented');
+	var n=0;
+	
+  arr.map(function(name){n=n+name;})  
+	return n;
 }
 
 /**
