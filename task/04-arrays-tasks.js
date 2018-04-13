@@ -621,8 +621,14 @@ function group(array, keySelector, valueSelector) {
  *   ['one','two','three'], x=>x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-	
-    throw new Error('Not implemented');
+	var array=[];
+	 arr.map(function(name){name=childrenSelector(name);
+		 if(Array.isArray(name)){name.map(function(name1){array=array.concat(name1);})}
+		 
+		 else
+		 {array=array.concat(name);}	 
+		 });
+    return array;
 }
 
 /**
@@ -639,7 +645,13 @@ function selectMany(arr, childrenSelector) {
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
 function getElementByIndexes(arr, indexes) {
-    throw new Error('Not implemented');
+   var n;
+   var arr1=[];
+	 arr.map(function(name,index){
+		 if(Array.isArray(name)){name.map(function(name1,index1){if(Array.isArray(name1)){name1.map(function(name2,index2){n=index2;})}else n=index1;})}
+	 else{if(index==indexes)n=name;};	 
+		 });
+    return n;
 }
 
 
@@ -662,7 +674,20 @@ function getElementByIndexes(arr, indexes) {
  *
  */
 function swapHeadAndTail(arr) {
-    throw new Error('Not implemented');
+   var array1=[];
+   var array2=[];
+   var n1,n;
+   n1=Math.floor(arr.length/2);
+   n=arr[n1];
+   if(arr.length%2==0)
+   arr.map(function(name,index){if(index+1<=arr.length/2)array1=array1.concat(name);else array2=array2.concat(name);});
+
+ if(arr.length%2!=0){arr.map(function(name,index){if(index+1<n)array1=array1.concat(name);else if(index+1>n) array2=array2.concat(name);});}
+ 
+   if(arr.length%2!=0){array2=array2.concat(n); return array2.concat(array1);}	
+   
+   if(arr.length%2==0){return array2.concat(array1);}	
+ 
 }
 
 
