@@ -648,7 +648,7 @@ function getElementByIndexes(arr, indexes) {
    var n;
    var arr1=[];
 	 arr.map(function(name,index){
-		 if(Array.isArray(name)){name.map(function(name1,index1){if(Array.isArray(name1)){name1.map(function(name2,index2){n=index2;})}else n=index1;})}
+		 if(Array.isArray(name)){name.map(function(name1,index1){if(Array.isArray(name1)){name1.map(function(name2,index2){if(indexes[2]==index2)n=name2;})}else if(indexes[1]==index1) if(indexes[0]==index) n=name1;})}
 	 else{if(index==indexes)n=name;};	 
 		 });
     return n;
