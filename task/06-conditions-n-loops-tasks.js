@@ -242,7 +242,11 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
-    throw new Error('Not implemented');
+	 var str1='';	 
+	for(var i=str.length-1;i>=0;i--)str1=str1.concat(str[i]);
+		
+    return str1;	
+    
 }
 
 
@@ -259,7 +263,11 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
-    throw new Error('Not implemented');
+   	var str1='';	 
+	var str2=String(num);
+	for(var i=str2.length-1;i>=0;i--)str1=str1.concat(str2[i]);
+		
+    return Number(str1);	
 }
 
 
@@ -284,7 +292,24 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
-    throw new Error('Not implemented');
+	var sum=0;
+	var stringbuf=String(ccn);
+	var digits=stringbuf.length;
+	var parity=digits%2;
+	var dig=0;
+	
+	for (var i=0;i<digits;i++){
+		dig=Number(stringbuf[i]);
+		if(i%2==parity)
+		{
+			dig=dig*2;
+			if(dig>9)
+				dig=dig-9;
+		}
+		sum=sum+dig;
+		
+	}
+   if(sum%10==0)return true; else return false; 
 }
 
 
@@ -303,7 +328,13 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
-    throw new Error('Not implemented');
+	var sum=0;
+	var str=String(num);
+	for (var i=0;i<String(num).length;i++){
+		sum+=Number(str[i]);
+	}
+	if(sum>9){str=String(sum);sum=0;sum=Number(str[0])+Number(str[1]);}
+   return sum;
 }
 
 
@@ -330,7 +361,23 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-    throw new Error('Not implemented');
+	var cir,squ,tri,bea;
+   cir=0;squ=0;tri=0;bea=0;
+   for(var i=0;i<str.length;i++){
+	   if(str[i]=='['){cir++;if(i!=str.length)if(str[i+1]==')'||str[i+1]=='}'||str[i+1]=='>')return false;}
+	   if(str[i]==']')cir--;
+	   if(str[i]=='('){squ++;if(i!=str.length)if(str[i+1]==']'||str[i+1]=='}'||str[i+1]=='>')return false;}
+	   if(str[i]==')')squ--;
+	   if(str[i]=='<'){tri++;if(i!=str.length)if(str[i+1]=='}'||str[i+1]==']'||str[i+1]==')')return false;}		  
+       if(str[i]=='>')tri--;
+	   if(str[i]=='{'){bea++;if(i!=str.length)if(str[i+1]==']')return false;}
+	   if(str[i]=='}')bea--;
+	   if(cir<0||tri<0||bea<0||squ<0){return false;}
+   }
+   if(cir==0&&squ==0&&tri==0&&bea==0)
+   return true;
+	else
+	return false;
 }
 
 
@@ -366,7 +413,43 @@ function isBracketsBalanced(str) {
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+var str="";
+var buf,buf1,buf2;
+ buf=(endDate.getYear()-startDate.getYear())*60*60*24*30*12;
+ buf+=(endDate.getMonth()-startDate.getMonth())*60*60*24*30;
+ buf+=(endDate.getDate()-startDate.getDate())*60*60*24;
+ buf+=(endDate.getHours()-startDate.getHours())*60*60;
+ buf+=(endDate.getMinutes()-startDate.getMinutes())*60;
+ buf+=endDate.getSeconds()-startDate.getSeconds();
+
+ buf+=(endDate.getMilliseconds()-startDate.getMilliseconds())/100;
+ buf2=(endDate.getMilliseconds()-startDate.getMilliseconds())/100;
+
+if(buf<=60*60*24*345)
+{
+  if(buf<=60*60*24*25)
+  {
+	  if(buf<=60*60*22)	  
+	  {
+		  if(buf<=60*90) 
+		  {
+			 if(buf<=90) 
+			 {
+				 if(buf<=45)return 'a few seconds ago';
+				 if(buf>45&&buf<=90) return 'a minute ago';
+			 }
+			  if(buf>90&&buf<=120) return '2 minutes ago';else if(buf>120&&buf<=60*45){buf1=Math.floor(buf/60);return   String(buf1)+' minutes ago';}else return 'an hour ago';
+		  }
+		  if(buf>60*90&&buf<=60*120) return '2 hours ago';else if(buf>60*90&&buf<=60*60*22){buf1=Math.fround(buf/(60*60));if(buf1-0.5<=Math.floor(buf/(60*60))) {buf1=Math.floor(buf/(60*60));}else {buf1=Math.round(buf1)}
+    	  return String(buf1)+' hours ago';}else return 'a day ago';		  
+	  }
+	if(buf>60*60*22&&buf<=60*60*36)return 'a day ago';else if(buf>60*60*36&&buf<=60*60*24*25){buf1=Math.fround(buf/(60*60*24));if(buf1-0.5<=Math.floor(buf/(60*60*24))) {buf1=Math.floor(buf/(60*60*24));}else {buf1=Math.round(buf1)}return   String(buf1)+' days ago';  }
+  }
+  if(buf>60*60*24*25&&buf<60*60*24*45)return 'a month ago';else if(buf>=60*60*24*45&&buf<=60*60*24*345){buf1=Math.round(buf/(60*60*24*30));if(buf<=60*60*24*340)return   String(buf1)+' months ago';  }
+  
+}
+	 if(buf>=60*60*24*300&&buf<=60*60*24*545)return 'a year ago';else if(buf>60*60*24*545){buf1=Math.round(buf/(60*60*24*365));return   String(buf1)+' years ago';  }
+   
 }
 
 /**
