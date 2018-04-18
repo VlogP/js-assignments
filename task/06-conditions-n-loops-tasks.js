@@ -501,7 +501,49 @@ function toNaryString(num, n) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(pathes) {
-    throw new Error('Not implemented');
+	var str1='',str2='',bufstr3='';
+	var s=0;
+	var arr=[];
+	
+	for(var i=0;i<pathes.length;i++)
+	{ 
+	arr.push(pathes[i].split('/'));
+	}
+	if(pathes.length==2)
+	for(var i=0;i<pathes.length;i++)
+	for(var j=0;j<arr[i].length;j++)
+		{
+			
+			if(arr[0][j]==arr[1][j]){
+				if(j==0)bufstr3=bufstr3+'/';
+				if(arr[0][j]=='')
+				{}
+				else
+				bufstr3=bufstr3+String(arr[0][j])+'/';
+			}
+			else return bufstr3
+			
+		
+		}
+	else
+		for(var i=0;i<pathes.length;i++)
+		for(var j=0;j<arr[i].length;j++)
+		{
+			
+			if(arr[0].toString[j]==arr[1][j]==arr[2][j]){
+				if(j==0)bufstr3=bufstr3+'/';
+				if(arr[0][j]=='')
+				{}
+				else
+				bufstr3=bufstr3+String(arr[0][j])+'/';
+			}
+			else return bufstr3
+			
+		
+		}
+	
+    return bufstr3;
+	 
 }
 
 
@@ -524,6 +566,7 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
+	
     throw new Error('Not implemented');
 }
 
@@ -559,7 +602,70 @@ function getMatrixProduct(m1, m2) {
  *
  */
 function evaluateTicTacToePosition(position) {
-    throw new Error('Not implemented');
+var res1=0,res2=0;
+
+for(var i=0;i<position.length;i++)
+{
+	
+	for(var j=0;j<position[i].length;j++)
+	{
+		if(position[i][j]=='X')
+		res1++;
+		if(position[i][j]=='0')
+		res2++;
+	}	
+		 if(res1==3)return 'X';
+	if(res2==3)return '0';
+	res1=0;res2=0;
+		
+}
+   
+
+	for(var j=0;j<3;j++)
+	{
+		res1=0;res2=0;
+		
+		for(var z=0;z<position[j].length;z++)
+		{
+			
+		if(position[z][j]=='X')
+		res1++;
+		if(position[z][j]=='0')
+		res2++;
+		}	
+		 if(res1==3)return 'X';
+		 if(res2==3)return '0';
+	}	
+	
+	     if(res1==3)return 'X';
+	     if(res2==3)return '0';
+	     res1=0;res2=0;
+	
+		
+		for(var z=0,j=0;z<3;z++,j++)
+		{
+		if(position[j][z]=='X')
+		res1++;
+		if(position[j][z]=='0')
+		res2++;
+		}
+		 
+		 if(res1==3)return 'X';
+	     if(res2==3)return '0';
+	     res1=0;res2=0;
+		 
+		for(var z=2,j=0;z>=0;z--,j++)
+		{
+		if(position[j][z]=='X')
+		res1++;
+		if(position[j][z]=='0')
+		res2++;
+		}
+				
+		
+	if(res1==3)return 'X';
+	if(res2==3)return '0';
+    return undefined;
 }
 
 
