@@ -565,7 +565,7 @@ function getIntervalArray(start, end) {
  */
 function distinct(arr) {
 	var array=[];
-	arr.map(function(name){if(!array.includes(name))array=array.concat(name);})
+	arr.map(function(name){if(array.indexOf(name)==-1)array=array.concat(name);})
    return array ;
 }
 

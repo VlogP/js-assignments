@@ -448,7 +448,7 @@ if(buf<=60*60*24*345)
   if(buf>60*60*24*25&&buf<60*60*24*45)return 'a month ago';else if(buf>=60*60*24*45&&buf<=60*60*24*345){buf1=Math.round(buf/(60*60*24*30));if(buf<=60*60*24*340)return   String(buf1)+' months ago';  }
   
 }
-	 if(buf>=60*60*24*300&&buf<=60*60*24*545)return 'a year ago';else if(buf>60*60*24*545){buf1=Math.round(buf/(60*60*24*365));return   String(buf1)+' years ago';  }
+	 if(buf>=60*60*24*340&&buf<=60*60*24*545)return 'a year ago';else if(buf>60*60*24*545){buf1=Math.round(buf/(60*60*24*365));return   String(buf1)+' years ago';  }
    
 }
 
@@ -472,7 +472,19 @@ if(buf<=60*60*24*345)
  *    365, 10 => '365'
  */
 function toNaryString(num, n) {
-    throw new Error('Not implemented');
+	var str='';
+    var buf=num,buf1,buf2;
+	
+	while(buf>=n){
+	buf1=buf%n;
+	
+		if(buf1==0){buf=buf/n;str='0'+str;}
+		if(buf1!=0){buf=Math.floor(buf/n);str=String(buf1)+str;}
+	
+	if(buf<n){str=String(buf)+str}
+	
+	}
+	return str;
 }
 
 
