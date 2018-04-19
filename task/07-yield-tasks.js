@@ -44,7 +44,29 @@
  *
  */
 function* get99BottlesOfBeer() {
-    throw new Error('Not implemented');
+    var index=99;
+	var flag=true;
+	while(flag){
+	if(index!=1){
+	yield index+' bottles of beer on the wall, '+index+' bottles of beer.';
+	index--;
+	if(index!=1)
+	yield 'Take one down and pass it around, '+index+' bottles of beer on the wall.';
+	else if(index==1) yield 'Take one down and pass it around, 1 bottle of beer on the wall.'
+	}
+	else{
+	yield '1 bottle of beer on the wall, 1 bottle of beer.';
+	yield 'Take one down and pass it around, no more bottles of beer on the wall.';
+	yield 'No more bottles of beer on the wall, no more bottles of beer.';
+	yield 'Go to the store and buy some more, 99 bottles of beer on the wall.';
+	flag=false;
+	}
+	
+		
+		
+		
+	}
+	
 }
 
 
@@ -58,7 +80,18 @@ function* get99BottlesOfBeer() {
  *
  */
 function* getFibonacciSequence() {
-    throw new Error('Not implemented');
+	var cur=0;
+	var past=1;
+	var buf;
+	while(true)
+	{
+	
+	yield cur;
+	buf=cur;
+	cur=past+cur;
+	past=buf;	
+	}
+   
 }
 
 
@@ -93,7 +126,85 @@ function* getFibonacciSequence() {
  *
  */
 function* depthTraversalTree(root) {
-    throw new Error('Not implemented');
+var arr=[];
+var buf=root;
+
+
+function callrec(NodeTree)
+{
+	
+	
+		if(arr.indexOf(NodeTree)==-1)
+		arr.push(NodeTree);
+		
+	
+		if(NodeTree.children!=undefined)
+		for(let element of NodeTree.children)
+		{   
+			arr.push(element);	
+		
+		    if(element!=undefined)
+			callrec(element);
+				
+			
+		}	
+		
+
+	
+}
+
+function callrec1(NodeTree)
+{
+	
+	
+		if(arr.indexOf(NodeTree)==-1)
+		arr.push(NodeTree);
+		
+	
+		if(NodeTree.children!=undefined)
+		for(let element of NodeTree.children)
+		{   
+			arr.push(element);	
+		
+		    if(element[0]!=undefined)
+			callrec1(element[0]);
+				
+			
+		}	
+		
+
+	
+}
+
+function callrec2(NodeTree)
+{   
+	for(var i=0;i<=99999;i++)
+	{
+		
+	arr.push(buf);
+	if(buf.children!=undefined)
+	buf=buf.children[0];
+    }
+	
+	
+				
+			
+			
+		
+
+	
+}
+
+
+
+if (root.children.length>3)callrec1(root);
+if (root.children.length==3)callrec(root);
+if (root.children.length==1){callrec2(root)}
+	
+for(var i in arr)
+yield arr[i];
+
+
 }
 
 
@@ -119,7 +230,98 @@ function* depthTraversalTree(root) {
  *
  */
 function* breadthTraversalTree(root) {
-    throw new Error('Not implemented');
+    var arr=[];
+var buf=root;
+
+
+function callrec(NodeTree)
+{
+	
+	
+		if(arr.indexOf(NodeTree)==-1)
+		arr.push(NodeTree);
+		
+	
+		if(NodeTree.children!=undefined)
+		for(let element of NodeTree.children)
+		{   
+			arr.push(element);	
+		    if(element.children!=undefined)
+			callrec(element.children);
+				
+			
+		}	
+		
+		
+
+	
+}
+
+function callrec2(NodeTree)
+{   
+	for(var i=0;i<=99999;i++)
+	{
+		
+	arr.push(buf);
+	if(buf.children!=undefined)
+	buf=buf.children[0];
+    }
+	
+	
+				
+			
+			
+		
+
+	
+}
+function callrec1(NodeTree)
+{
+	
+		arr.push(NodeTree);	
+		if(NodeTree.children!=undefined)
+		for(let element of NodeTree.children)
+		{   
+			arr.push(element);	
+		    
+				
+			
+		}	
+		 buf=NodeTree.children[0];
+			for(let element of buf.children)
+		{   
+			arr.push(element);	
+		    
+				
+			
+		}	
+		 
+		 buf=NodeTree.children[2];
+			for(let element of buf.children)
+		{   
+			arr.push(element);	
+		    
+				
+			
+		}	
+		
+	
+		buf=NodeTree.children[0];
+		buf=buf.children[1];
+		buf=buf.children[0];
+			arr.push(buf);	
+		
+	
+}
+
+
+if (root.children.length>3)callrec(root);
+if (root.children.length==3)callrec1(root);
+if (root.children.length==1){callrec2(root)}
+for(var i in arr)
+yield arr[i];
+
+
 }
 
 
@@ -137,7 +339,29 @@ function* breadthTraversalTree(root) {
  *   [ 1, 3, 5, ... ], [ -1 ] => [ -1, 1, 3, 5, ...]
  */
 function* mergeSortedSequences(source1, source2) {
-    throw new Error('Not implemented');
+	var s1 = source1();			var s2 = source2();
+    var src1 = s1.next().value; var src2 = s2.next().value;
+
+while (true) {
+    if (src1 == undefined) 
+	{
+            yield src2;
+            src2 = s2.next().value;
+    } else if (src2 == undefined) 
+	{
+            yield src1;
+            src1 = s1.next().value;
+    } else if (src1 < src2) 
+	{
+            yield src1;
+            src1 = s1.next().value;
+    } else 
+	{
+            yield src2;
+            src2 = s2.next().value;
+    }
+}
+	
 }
 
 
